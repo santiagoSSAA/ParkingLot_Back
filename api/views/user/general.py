@@ -1,5 +1,6 @@
 """ Contains User endpoint definition """
 from cerberus import Validator
+from datetime import datetime
 
 from django.contrib.auth.hashers import make_password
 from django.db.models import Q
@@ -47,7 +48,7 @@ class UserApi(APIView, TokenHandler):
                 "required": True, "type": "string", "allowed": ["M", "F", "U"]},
             "number_plate": {"required": True, "type": "string"},
         })
-        if not validator.validate(request.GET):
+        if not validator.validate(request.data):
             return Response({
                 "code": "invalid_filtering_params",
                 "detailed": "Parámetros de búsqueda inválidos",
