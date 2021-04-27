@@ -1,0 +1,2 @@
+CLIENT = 'Cliente'
+ADMINISTRATOR = "Administrador"
