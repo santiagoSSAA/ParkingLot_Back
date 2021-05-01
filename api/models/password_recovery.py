@@ -3,7 +3,7 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
-class PasswordRecovert(TimeStampedModel):
+class PasswordRecovery(TimeStampedModel):
     """
     Extends class TimeStampedModel.
     This class add fields created and modified
