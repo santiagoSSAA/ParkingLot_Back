@@ -55,4 +55,4 @@ class Reservation(TimeStampedModel):
         # final_hour > now > initial_hour
         if self.is_cancelled or self.is_finished(): return "Finalizado"
         if self.is_current(): return "Vigente"
-        return "próximo"
+        return "Próximo"

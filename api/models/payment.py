@@ -17,7 +17,8 @@ class Payment(TimeStampedModel):
     Extends class TimeStampedModel.
     This class add fields created and modified
     """
-    reservation = models.ForeignKey("Reservation", null=True, blank=True)
+    reservation = models.ForeignKey("Reservation", on_delete=models.CASCADE,
+        null=True, blank=True)
     price = models.IntegerField("Valor", default=0)
     concept = models.TextField("concepto", default="")
     status = models.CharField("Estado", max_length=25,
