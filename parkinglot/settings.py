@@ -24,9 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.getenv(
-    "SECRET_KEY", " "
-)
+SECRET_KEY = os.getenv("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "True") == "True"
@@ -105,9 +103,7 @@ WSGI_APPLICATION = 'parkinglot.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 if "DATABASE_URL" not in os.environ:
-    os.environ[
-        "DATABASE_URL"
-    ] = " "
+    os.environ["DATABASE_URL"] = ""
 
 DATABASES = {}
 DATABASES["default"] = dj_database_url.config(conn_max_age=600)
