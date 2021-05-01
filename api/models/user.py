@@ -15,6 +15,11 @@ class User(AbstractUser):
         ("F", "Femenino"),
         ("U", "No definido"))
 
+    VEHICLE_TYPE = (
+        ("auto", "Automovil"),
+        ("moto", "Motocicleta"),
+    )
+
     birthdate = models.DateField("Fecha de nacimiento", blank=True, null=True)
     document = models.CharField("Documento", max_length=255, unique=True)
     name = models.CharField("Primer Nombre", max_length=255)
@@ -27,6 +32,8 @@ class User(AbstractUser):
     profile = models.ManyToManyField(Profile, related_name='user_profile')
     number_plate = models.CharField(
         "Numero de placa del vehiculo", max_length=6)
+    vehicle_type = models.TextField("Tipo de vehículo", choices=VEHICLE_TYPE,
+        default="auto")
 
     REQUIRED_FIELDS = ['email']
 
