@@ -47,6 +47,8 @@ class UserApi(APIView, TokenHandler):
             "gender": {
                 "required": True, "type": "string", "allowed": ["M", "F", "U"]},
             "number_plate": {"required": True, "type": "string"},
+            "vehicle_type": {"required": False, "type": "string",
+                "allowed": ["auto","moto"] }
         })
         if not validator.validate(request.data):
             return Response({

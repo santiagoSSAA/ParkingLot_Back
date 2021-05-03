@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'email', 'name', 'birthdate', 'gender', 'cellphone',
             'state', 'city', 'address', 'document', 'profile',
-            'creation_date', 'number_plate'
+            'creation_date', 'number_plate', 'vehicle_type'
         ]
         extra_kwargs = {'password': {'write_only': True}}
 

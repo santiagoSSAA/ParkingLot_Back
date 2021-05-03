@@ -36,9 +36,9 @@ class User(AbstractUser):
     profile = models.CharField("Perfil", max_length=255, choices=PROFILE_CHOICES, 
         default="user")
     number_plate = models.CharField(
-        "Numero de placa del vehiculo", max_length=6)
+        "Numero de placa del vehiculo", max_length=6, null=True, blank=True)
     vehicle_type = models.TextField("Tipo de vehículo", choices=VEHICLE_TYPE,
-        default="auto")
+        null= True, blank=True)
 
     REQUIRED_FIELDS = ['email']
 
