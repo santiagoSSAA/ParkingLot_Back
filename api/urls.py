@@ -16,6 +16,12 @@ Including another URLconf
 
 from django.urls import path
 
+from .views.auth import AuthApi
+from .views.auth import RefreshTokenApi
+from .views.user.general import UserApi
+
 urlpatterns = [
-    
+    path("auth", AuthApi.as_view()),
+    path('refresh_token/<str:refresh>', RefreshTokenApi.as_view()),
+    path('user', UserApi.as_view()),
 ]

@@ -1,8 +1,8 @@
 """ Handler for tokens """
-import datetime as dt
 import jwt
 
 from django.conf import settings
+from django.utils import timezone
 
 from ..models.auth import Auth
 from ..models.user import User
@@ -37,12 +37,12 @@ class TokenHandler:
         except jwt.InvalidTokenError:
             return None, None
 
-        expiration_date = dt.datetime.strptime(token['expiration_date'],
-                                               '%Y-%m-%d %H:%M:%S.%f')
+        expiration_date = timezone.strptime(token['expiration_date'],
+            '%Y-%m-%d %H:%M:%S.%f')
 
         db_token = Auth.objects.filter(token=header.split(" ")[1]).first()
 
-        if (expiration_date < dt.datetime.now() or not db_token or
+        if (expiration_date < timezone.now() or not db_token or
                 db_token.is_disabled):
             return None, None
 

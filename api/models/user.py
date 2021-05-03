@@ -2,7 +2,6 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from .profile import Profile
 
 
 class User(AbstractUser):
@@ -20,6 +19,11 @@ class User(AbstractUser):
         ("moto", "Motocicleta"),
     )
 
+    PROFILE_CHOICES = (
+        ("user", "Cliente"),
+        ("admin", "Administrador")
+    )
+
     birthdate = models.DateField("Fecha de nacimiento", blank=True, null=True)
     document = models.CharField("Documento", max_length=255, unique=True)
     name = models.CharField("Primer Nombre", max_length=255)
@@ -29,7 +33,8 @@ class User(AbstractUser):
     address = models.CharField("Direccion", max_length=100, blank=True)
     gender = models.CharField(
         "Género", max_length=1, choices=GENDER_CHOICES, blank=True)
-    profile = models.ManyToManyField(Profile, related_name='user_profile')
+    profile = models.CharField("Perfil", max_length=255, choices=PROFILE_CHOICES, 
+        default="user")
     number_plate = models.CharField(
         "Numero de placa del vehiculo", max_length=6)
     vehicle_type = models.TextField("Tipo de vehículo", choices=VEHICLE_TYPE,

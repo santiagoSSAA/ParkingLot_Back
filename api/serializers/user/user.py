@@ -5,10 +5,6 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from .profile import ProfileSerializer
-from ...services.user_register import UserProfiles
-
-
 USER = get_user_model()
 
 
@@ -17,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=USER.objects.all())]
     )
-    profile = ProfileSerializer(read_only=True, many=True, required=False)
     document = serializers.CharField(
         validators=[UniqueValidator(queryset=USER.objects.all())])
 
