@@ -26,11 +26,9 @@ class User(AbstractUser):
 
     birthdate = models.DateField("Fecha de nacimiento", blank=True, null=True)
     document = models.CharField("Documento", max_length=255, unique=True)
-    name = models.CharField("Primer Nombre", max_length=255)
+    name = models.CharField("Nombres", max_length=255)
     cellphone = models.CharField("Celular", max_length=11, blank=True)
-    state = models.CharField("Departamento", max_length=100, blank=True)
-    city = models.CharField("Ciudad", max_length=100, blank=True)
-    address = models.CharField("Direccion", max_length=100, blank=True)
+    email = models.EmailField("Correo", unique=True)
     gender = models.CharField(
         "Género", max_length=1, choices=GENDER_CHOICES, blank=True)
     profile = models.CharField("Perfil", max_length=255, choices=PROFILE_CHOICES, 
