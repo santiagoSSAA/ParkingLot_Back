@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = USER
         fields = [
             'id', 'email', 'name', 'birthdate', 'gender', 'cellphone',
-            'document', 'profile', 'number_plate', 'vehicle_type']
+            'document', 'profile', 'number_plate', 'vehicle_type', 'creation_date']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

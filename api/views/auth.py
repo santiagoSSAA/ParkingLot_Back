@@ -4,9 +4,9 @@ from cerberus import Validator
 from datetime import timedelta
 import jwt
 
+from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
-from django.utils import timezone
 from django.utils.crypto import get_random_string
 
 from rest_framework import status
@@ -66,7 +66,7 @@ class AuthApi(APIView):
         expiration = (settings.TOKEN_SHORT_EXP if not
             request.data["keep_logged_in"] else settings.TOKEN_LONG_EXP)
         token = jwt.encode({
-            "expiration_date": str(timezone.now() + timedelta(hours=expiration)),
+            "expiration_date": str(datetime.now() + timedelta(hours=expiration)),
             "email": user.email,
             "type": request.data["type"],
             "refresh": refresh
@@ -157,7 +157,7 @@ class RefreshTokenApi(APIView):
         expiration = (settings.TOKEN_SHORT_EXP if not
             request.data["keep_logged_in"] else settings.TOKEN_LONG_EXP)
         token = jwt.encode({
-            "expiration_date": str(timezone.now() + timedelta(hours=expiration)),
+            "expiration_date": str(datetime.now() + timedelta(hours=expiration)),
             "email": user.email,
             "type": request.data["type"],
             "refresh": refresh

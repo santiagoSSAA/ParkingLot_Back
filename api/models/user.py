@@ -28,6 +28,7 @@ class User(AbstractUser):
     document = models.CharField("Documento", max_length=255, unique=True)
     name = models.CharField("Nombres", max_length=255)
     cellphone = models.CharField("Celular", max_length=11, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     email = models.EmailField("Correo", unique=True)
     gender = models.CharField(
         "Género", max_length=1, choices=GENDER_CHOICES, blank=True)

@@ -99,7 +99,7 @@ class UserApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if user.profile != "admin":
