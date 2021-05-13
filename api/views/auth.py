@@ -65,12 +65,12 @@ class AuthApi(APIView):
         refresh = get_random_string(30)
         expiration = (settings.TOKEN_SHORT_EXP if not
             request.data["keep_logged_in"] else settings.TOKEN_LONG_EXP)
-        token = jwt.enconde({
+        token = jwt.encode({
             "expiration_date": str(timezone.now() + timedelta(hours=expiration)),
             "email": user.email,
             "type": request.data["type"],
             "refresh": refresh
-        },algorithm='HS256').decode('utf-8')
+        }, settings.SECRET_KEY, algorithm='HS256').decode('utf-8')
 
         Auth.objects.create(token=token)
         return Response({
@@ -156,12 +156,12 @@ class RefreshTokenApi(APIView):
         refresh = get_random_string(30)
         expiration = (settings.TOKEN_SHORT_EXP if not
             request.data["keep_logged_in"] else settings.TOKEN_LONG_EXP)
-        token = jwt.enconde({
+        token = jwt.encode({
             "expiration_date": str(timezone.now() + timedelta(hours=expiration)),
             "email": user.email,
             "type": request.data["type"],
             "refresh": refresh
-        },algorithm='HS256').decode('utf-8')
+        }, settings.SECRET_KEY, algorithm='HS256').decode('utf-8')
 
         session = Auth.objects.filter(token=header.split(" ")[1])
         if not session:
