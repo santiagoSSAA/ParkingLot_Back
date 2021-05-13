@@ -22,9 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = USER
         fields = [
             'id', 'email', 'name', 'birthdate', 'gender', 'cellphone',
-            'state', 'city', 'address', 'document', 'profile',
-            'creation_date', 'number_plate', 'vehicle_type'
-        ]
+            'document', 'profile', 'number_plate', 'vehicle_type']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -45,9 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
         aux['username'] = aux['email'].lower()
         aux['email'] = aux['email'].lower()
         aux['password'] = make_password(validated_data['password'])
-
         user = USER.objects.create(**aux)
-        user = UserProfiles(user).add_profile(default="Cliente")
         user.save()
 
         return user
