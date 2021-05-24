@@ -27,6 +27,7 @@ class ParkingSlotSerializer(serializers.ModelSerializer):
         fields = ["place_code", "reservation", "status"]
 
     def get_reservation(self,obj):
-        reservation = Reservation.objects.filter((Q(get_status="Vigente")|Q(get_status="Próximo")),
-        slot=obj).first()
+        reservations = Reservation.objects.filter(slot=obj)
+        reserve_pk = [rese for rese in reservations if rese.get_status() in ["Vigente", "Próximo"]]
+        reservations.filter(pk__in=reserve_pk).first()
         return None if not reservation else reservation
