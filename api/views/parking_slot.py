@@ -49,7 +49,7 @@ class ParkingSlotApi(APIView, TokenHandler):
             }, status=status.HTTP_400_BAD_REQUEST)
 
         if ParkingSlot.objects.filter(
-            place_code=request.data.get("place_code"),is_active=True):
+            place_code=request.data.get("place_code").upper(),is_active=True):
             return Repsonse({
                 "code": "slot_already_exists",
                 "code": "Estacionamiento ya registrado"
