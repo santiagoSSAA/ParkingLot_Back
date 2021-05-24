@@ -52,15 +52,15 @@ class ReservationApi(APIView, TokenHandler):
             })
         else:
             validator = Validator({
-                "document": {"required": False, "type": "string"},
-                "email": {"required": False, "type": "string"},
+                "document": {"required": True, "type": "string"},
+                "email": {"required": True, "type": "string"},
                 "initial_hour": {"required": True, "type": "datetime",
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
                 "slot": {"required": True, "type": "integer"},
-                "vehicle_plate": {"required": False, "type": "string"},
-                "vehicle_type": {"required": False, "type": "string",
+                "vehicle_plate": {"required": True, "type": "string"},
+                "vehicle_type": {"required": True, "type": "string",
                     "allowed": ["auto","moto"] },
             })
         if not validator.validate(request.data):
