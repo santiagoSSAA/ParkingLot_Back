@@ -1,7 +1,6 @@
 """ Contains the reservation model """
 
 from django.db import models
-from django.utils import datetime
 from django_extensions.db.models import TimeStampedModel
 
 from datetime import datetime
