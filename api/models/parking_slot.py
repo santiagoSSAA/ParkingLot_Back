@@ -25,7 +25,7 @@ class ParkingSlot(TimeStampedModel):
 
     def get_status(self):
         reservations = Reservation.objects.filter(slot=self)
-        reserve_pk = [rese for rese in reservations if rese.get_status() in ["Vigente", "Próximo"]]
+        reserve_pk = [rese.pk for rese in reservations if rese.get_status() in ["Vigente", "Próximo"]]
         reservation = reservations.filter(pk__in=reserve_pk)
         if reservation:
             return "Ocupado"
