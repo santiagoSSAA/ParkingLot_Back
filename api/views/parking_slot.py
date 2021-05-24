@@ -104,7 +104,7 @@ class ParkingSlotApi(APIView, TokenHandler):
             slots = ParkingSlot.objects.filter(pk__in=slots)
 
         count = slots.count()
-        data = slots.order_by('-creation_date')[
+        data = slots.order_by('-created')[
             self.pagination_start: self.pagination_end + 1]
         return Response({
             'count': count,
