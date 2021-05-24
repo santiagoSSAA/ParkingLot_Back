@@ -39,7 +39,10 @@ class ReservationApi(APIView, TokenHandler):
         """
         payload, user = self.get_payload(request)
         def to_date(s): return datetime.strptime(s, '%Y-%m-%d %H:%M')
-        if payload:
+        if not payload:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        if user.profile == "user":
             validator = Validator({
                 "initial_hour": {"required": True, "type": "datetime",
                     "coerce": to_date},
@@ -70,7 +73,7 @@ class ReservationApi(APIView, TokenHandler):
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        if payload:
+        if user.profile == "user":
             request.data["user"] = user
 
         slot = ParkingSlot.objects.filter(pk=request.data.get("slot")).first()
