@@ -15,7 +15,7 @@ class ParkingSlotClientSerializer(serializers.ModelSerializer):
 
     class Meta: # pylint: disable=too-few-public-methods
         model = ParkingSlot
-        fields = ["place_code", "status"]
+        fields = ["id", "place_code", "status"]
 
 class ParkingSlotSerializer(serializers.ModelSerializer):
     """ Defines Parking slot serializer behaviour. """
@@ -24,7 +24,7 @@ class ParkingSlotSerializer(serializers.ModelSerializer):
 
     class Meta: # pylint: disable=too-few-public-methods
         model = ParkingSlot
-        fields = ["place_code", "reservation", "status"]
+        fields = ["id", "place_code", "reservation", "status"]
 
     def get_reservation(self,obj):
         reservations = Reservation.objects.filter(slot=obj)
