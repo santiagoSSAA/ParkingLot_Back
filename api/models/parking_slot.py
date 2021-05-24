@@ -21,7 +21,7 @@ class ParkingSlot(TimeStampedModel):
         verbose_name_plural = "Lista de aparcamientos"
 
     def __str__(self):
-        return f"{self.pk}. {self.place_code} - {self.status}"
+        return f"{self.pk}. {self.place_code} - {self.get_status()}"
 
     def get_status(self):
         if Reservation.objects.filter((Q(get_status="Vigente")|Q(get_status="Próximo")),
