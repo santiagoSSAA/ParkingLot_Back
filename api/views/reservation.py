@@ -37,20 +37,32 @@ class ReservationApi(APIView, TokenHandler):
                 Body response and status code.
 
         """
+        payload, user = self.get_payload(request)
         def to_date(s): return datetime.strptime(s, '%Y-%m-%d %H:%M')
-        validator = Validator({
-            "document": {"required": False, "type": "string"},
-            "email": {"required": False, "type": "string"},
-            "initial_hour": {"required": True, "type": "datetime",
-                "coerce": to_date},
-            "final_hour": {"required": False, "type": "datetime",
-                "coerce": to_date},
-            "slot": {"required": True, "type": "integer"},
-            "user": {"required": False, "type": "integer"},
-            "vehicle_plate": {"required": False, "type": "string"},
-            "vehicle_type": {"required": False, "type": "string",
-                "allowed": ["auto","moto"] },
-        })
+        if payload:
+            validator = Validator({
+                "initial_hour": {"required": True, "type": "datetime",
+                    "coerce": to_date},
+                "final_hour": {"required": False, "type": "datetime",
+                    "coerce": to_date},
+                "slot": {"required": True, "type": "integer"},
+                "vehicle_plate": {"required": False, "type": "string"},
+                "vehicle_type": {"required": False, "type": "string",
+                    "allowed": ["auto","moto"] },
+            })
+        else:
+            validator = Validator({
+                "document": {"required": False, "type": "string"},
+                "email": {"required": False, "type": "string"},
+                "initial_hour": {"required": True, "type": "datetime",
+                    "coerce": to_date},
+                "final_hour": {"required": False, "type": "datetime",
+                    "coerce": to_date},
+                "slot": {"required": True, "type": "integer"},
+                "vehicle_plate": {"required": False, "type": "string"},
+                "vehicle_type": {"required": False, "type": "string",
+                    "allowed": ["auto","moto"] },
+            })
         if not validator.validate(request.data):
             return Response({
                 "code": "invalid_filtering_params",
