@@ -4,8 +4,7 @@ import copy
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-
-USER = get_user_model()
+from ...models.user import User
 
 
 class BasicUserDisplaySerializer(serializers.ModelSerializer):
@@ -13,9 +12,9 @@ class BasicUserDisplaySerializer(serializers.ModelSerializer):
     class Meta:  # pylint: disable=too-few-public-methods
         """ Defines serializer fields that are being used """
 
-        model = USER
+        model = User
         fields = [
-            'id', 'email', 'first_name', 'second_name',
-            'last_name', 'cellphone', 'document',
-            'creation_date'
+            'id', 'email', 'name', 'cellphone', 'document',
+            'creation_date', 'birthdate', 'gender', 'profile',
+            'number_plate', 'vehicle_type'
         ]

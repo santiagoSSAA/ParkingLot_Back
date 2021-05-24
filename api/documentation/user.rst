@@ -21,7 +21,7 @@ Crea un usuario en la plataforma.
 *Campos opcionales*
 
 :number_plate: **(string)** Número de placa.
-:vehicle_type:: **(string)** Tipo de vehículo ( auto, moto ).
+:vehicle_type:: **(string)** Tipo de vehículo (auto, moto).
 
 **Ejemplo de petición**
 
@@ -161,7 +161,6 @@ Modifica la información de un usuario en la plataforma.
 :gender: **(string)** Género ( M , F , U ).
 :number_plate: **(string)** Número de placa.
 :vehicle_type:: **(string)** Tipo de vehículo ( auto, moto ).
-:is_active:: **(Boolean)** Es usuario activo.
 
 **Ejemplo de petición**
 
