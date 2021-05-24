@@ -162,8 +162,10 @@ class ReservationApi(APIView, TokenHandler):
             reserve.get_status() != "Finalizado"]
             data = data.filter(pk__in=reserve_pks)
 
-        return Response(ReservationSerializer(data,many=True).data,
-        status=status.HTTP_200_OK)
+        return Response({
+            "code": data.count(),
+            "data": ReservationSerializer(data,many=True).data
+        }, status=status.HTTP_200_OK)
 
 class SpecificReservationApi(APIView, TokenHandler):
     """ Defines the HTTP verbs to specific reservation model management. """
