@@ -99,8 +99,8 @@ class ReservationApi(APIView, TokenHandler):
             },status=status.HTTP_409_CONFLICT)
 
         if (request.data.get("final_hour") and
-            (request.data.get("final_hour") - request.data.get(
-                "initial_hour")).seconds / 3600 < 1):
+            (datetime.strptime(request.data.get("final_hour"), '%Y-%m-%d %H:%M') - datetime.strptime(
+                request.data.get("initial_hour"), '%Y-%m-%d %H:%M')).seconds / 3600 < 1):
             return Response({
                 "code": "invalid_final_hour",
                 "detailed": "La reservación debe durar al menos una (1) hora."
