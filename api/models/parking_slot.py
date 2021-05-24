@@ -13,6 +13,7 @@ class ParkingSlot(TimeStampedModel):
     This class add fields created and modified
     """
     place_code = models.TextField("Código de aparcamiento", unique=True)
+    is_active = models.BooleanField("está activo", default=True)
 
     class Meta: #pylint: disable=too-few-public-methods
         """ Sets human readable name """
