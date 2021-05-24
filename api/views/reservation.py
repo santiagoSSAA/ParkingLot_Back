@@ -98,6 +98,13 @@ class ReservationApi(APIView, TokenHandler):
                 "detailed": "Ya existe una reserva con la hora estipulada."
             },status=status.HTTP_409_CONFLICT)
 
+        if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') <
+            datetime.now()):
+            return Response({
+                "code": "invalid_initial_hour",
+                "detailed": "No se puede iniciar reservas con horas pasadas."
+            },status=status.HTTP_409_CONFLICT)
+
         if (request.data.get("final_hour") and
             (datetime.strptime(request.data.get("final_hour"), '%Y-%m-%d %H:%M') - datetime.strptime(
                 request.data.get("initial_hour"), '%Y-%m-%d %H:%M')).seconds / 3600 < 1):
