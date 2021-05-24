@@ -70,25 +70,8 @@ class ReservationApi(APIView, TokenHandler):
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        if ("user" not in request.data and all(
-            elem in ["document", "email"] for elem in request.data.keys())):
-            return Response({
-                "code": "invalid_filtering_params",
-                "detailed": "Parámetros de búsqueda inválidos",
-                "data": ("Se debe ingresar document y email en caso de no"
-                " ingresar user")
-            }, status=status.HTTP_400_BAD_REQUEST)
-
-        if request.data.get("user") and not User.objects.filter(
-            pk=request.data.get("user")):
-            return Response({
-                "code": "user_not_found",
-                "detailed": "Usuario no encontrado"
-            },status=status.HTTP_404_NOT_FOUND)
-
-        if request.data.get("user"):
-            request.data["user"] = User.objects.filter(
-                pk=request.data.get("user")).first()
+        if payload:
+            request.data["user"] = user
 
         slot = ParkingSlot.objects.filter(pk=request.data.get("slot")).first()
         if not slot:
