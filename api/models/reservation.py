@@ -1,8 +1,10 @@
 """ Contains the reservation model """
 
 from django.db import models
-from django.utils import timezone
+from django.utils import datetime
 from django_extensions.db.models import TimeStampedModel
+
+from datetime import datetime
 
 _VEHICLE_TYPE = (
     ("auto", "Automovil"),
@@ -42,12 +44,12 @@ class Reservation(TimeStampedModel):
         return f"{self.pk}. ({date}) | {initial} - {final} | {self.get_status()}"
 
     def is_finished(self):
-        if self.final_hour and self.final_hour < timezone.now():
+        if self.final_hour and self.final_hour < datetime.now():
             return True
         return False
 
     def is_current(self):
-        if self.initial_hour <= timezone.now() and not self.is_finished():
+        if self.initial_hour <= datetime.now() and not self.is_finished():
             return True
         return True
 
