@@ -30,4 +30,4 @@ class ParkingSlotSerializer(serializers.ModelSerializer):
         reservations = Reservation.objects.filter(slot=obj)
         reserve_pk = [rese.pk for rese in reservations if rese.get_status() in ["Vigente", "Próximo"]]
         reservation = reservations.filter(pk__in=reserve_pk).first()
-        return None if not reservation else reservation
+        return None if not reservation else ReservationSerializer(reservation)
