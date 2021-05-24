@@ -128,7 +128,7 @@ class ReservationApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         
         query = {}
@@ -183,7 +183,7 @@ class SpecificReservationApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         
         def to_date(s): return datetime.strptime(s, '%Y-%m-%d %H:%M')
@@ -246,7 +246,7 @@ class SpecificReservationApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         
         reservation = Reservation.objects.filter(pk=kwargs["id"]).first()

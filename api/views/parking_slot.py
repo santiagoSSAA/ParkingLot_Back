@@ -33,7 +33,7 @@ class ParkingSlotApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if user.profile != "admin":
@@ -76,7 +76,7 @@ class ParkingSlotApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         
         validator = Validator({
@@ -133,7 +133,7 @@ class SpecificParkingSlotApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if user.profile != "admin":
@@ -167,7 +167,7 @@ class SpecificParkingSlotApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if user.profile != "admin":
@@ -206,7 +206,7 @@ class SpecificParkingSlotApi(APIView, TokenHandler):
 
         """
         payload, user = self.get_payload(request)
-        if not payload or user.status == "pending":
+        if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if user.profile != "admin":
