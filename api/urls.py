@@ -22,6 +22,7 @@ from .views.user.general import UserApi
 from .views.user.general import SpecificUserApi
 from .views.reservation import ReservationApi
 from .views.reservation import SpecificReservationApi
+from .views.reservation import SpecificCostReservationApi
 from .views.parking_slot import ParkingSlotApi
 from .views.parking_slot import SpecificParkingSlotApi
 from .views.password_recovery import PasswordRecoveryApi
@@ -35,6 +36,7 @@ urlpatterns = [
     path('user/<int:id>', SpecificUserApi.as_view()),
     path('reservation', ReservationApi.as_view()),
     path('reservation/<int:id>', SpecificReservationApi.as_view()),
+    path('reservation/price/<int:id>', SpecificCostReservationApi.as_view()),
     path('parking_slot', ParkingSlotApi.as_view()),
     path('parking_slot/<int:id>', SpecificParkingSlotApi().as_view()),
     path('password_recovery', PasswordRecoveryApi.as_view()),

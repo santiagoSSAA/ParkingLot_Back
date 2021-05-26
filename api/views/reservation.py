@@ -5,6 +5,7 @@ from datetime import datetime
 
 from django.db.models import Q
 from django.utils import timezone
+from django.conf import settings
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -278,3 +279,57 @@ class SpecificReservationApi(APIView, TokenHandler):
         reservation.is_cancelled = True
         reservation.save()
         return Response(status=status.HTTP_200_OK)
+
+class SpecificCostReservationApi(APIView, TokenHandler):
+    """ Defines the HTTP verbs to cost reservation model management. """
+    def get(self, request, *args, **kwargs):
+        """ retrieve payment price.
+
+        Parameters
+        ----------
+
+        request (dict)
+            Contains http transaction information.
+
+        Returns
+        -------
+            Response (JSON, int)
+                Body response and status code.
+
+        """
+        payload, user = self.get_payload(request)
+        if not payload:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        if user.profile != "admin":
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        reservation = Reservation.objects.filter(pk=kwargs["id"]).first()
+        if not reservation:
+            return Response({
+                "code": "reservation_not_found",
+                "detailed": "Reserva no encontrada"
+            },status=status.HTTP_404_NOT_FOUND)
+
+        if reservation.user and request.GET["final_hour"]:
+            return Response({
+                "code": "final_hour_not_needed",
+                "detailed": "hora final no necesaria"
+            },status=status.HTTP_400_BAD_REQUEST)
+
+        if not reservation.user:
+            final_hour = timezone.now()
+            type = reservation.vehicle_type
+        else:
+            final_hour = reservation.final_hour
+            type = reservation.user.vehicle_type
+        initial_hour = reservation.initial_hour
+
+        if not final_hour or not initial_hour:
+            return Response({
+                "code": "hour_cannot_be_none",
+                "detailed": "reservación con datos de horas vacías"
+            }, status=status.HTTP_409_CONFLICT)
+
+        hour = (final_hour - initial_hour).seconds // 3600
+        return {"auto":settings.CAR_PRICE,"moto":settings.MOTO_PRICE}[type]
