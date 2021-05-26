@@ -188,7 +188,7 @@ class SpecificParkingSlotApi(APIView, TokenHandler):
             },status=status.HTTP_404_NOT_FOUND)
 
         ParkingSlot.objects.filter(pk=kwargs["id"]).update(**request.data)
-        return Reponse(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
         """ Delete slot information.
@@ -221,4 +221,4 @@ class SpecificParkingSlotApi(APIView, TokenHandler):
             },status=status.HTTP_404_NOT_FOUND)
         slot.is_active = False
         slot.save()
-        return Reponse(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
