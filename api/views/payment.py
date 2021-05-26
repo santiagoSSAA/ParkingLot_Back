@@ -45,7 +45,7 @@ class PaymentApi(APIView, TokenHandler):
             "price": {"required": True, "type": "integer"},
             "concept": {"required": True, "type": "string"},
             "status": {"required": True, "type": "string", "allowed": [
-                e[1] for e in _PAYMENT_STATUS_CHOICES]},
+                e[0] for e in _PAYMENT_STATUS_CHOICES]},
         })
         if not validator.validate(request.data):
             return Response({
