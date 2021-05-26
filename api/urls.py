@@ -26,6 +26,7 @@ from .views.parking_slot import ParkingSlotApi
 from .views.parking_slot import SpecificParkingSlotApi
 from .views.password_recovery import PasswordRecoveryApi
 from .views.password_recovery import SpecificPasswordRecoveryApi
+from .views.payment import PaymentApi
 
 urlpatterns = [
     path("auth", AuthApi.as_view()),
@@ -38,4 +39,5 @@ urlpatterns = [
     path('parking_slot/<int:id>', SpecificParkingSlotApi().as_view()),
     path('password_recovery', PasswordRecoveryApi.as_view()),
     path('password_recovery/<str:token>', SpecificPasswordRecoveryApi.as_view()),
+    path('payment', PaymentApi.as_view()),
 ]

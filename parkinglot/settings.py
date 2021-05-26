@@ -167,3 +167,6 @@ TOKEN_SHORT_EXP = os.getenv("TOKEN_SHORT_EXP", 2)
 TOKEN_LONG_EXP = os.getenv("TOKEN_LONG_EXP", 12)
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'santiago.sanchez.ssaa2@gmail.com')
 HOSTNAME = os.getenv('HOSTNAME', 'https://parkinglot-front.herokuapp.com/')
+
+CAR_PRICE = 8000.0
+MOTO_PRICE = 1000.0
