@@ -311,12 +311,6 @@ class SpecificCostReservationApi(APIView, TokenHandler):
                 "detailed": "Reserva no encontrada"
             },status=status.HTTP_404_NOT_FOUND)
 
-        if reservation.user and request.GET["final_hour"]:
-            return Response({
-                "code": "final_hour_not_needed",
-                "detailed": "hora final no necesaria"
-            },status=status.HTTP_400_BAD_REQUEST)
-
         if not reservation.user:
             final_hour = timezone.now()
             type = reservation.vehicle_type
