@@ -108,11 +108,11 @@ class PaymentApi(APIView, TokenHandler):
             query["status"] = request.GET["status"]
 
         if query:
-            count = Payment.object.filter(**query).count()
-            payments = Payment.object.filter(**query)
+            count = Payment.objects.filter(**query).count()
+            payments = Payment.objects.filter(**query)
         else:
-            count = Payment.object.all().count()
-            payments = Payment.object.all()
+            count = Payment.objects.all().count()
+            payments = Payment.objects.all()
 
         return Response({
             "count": count,
