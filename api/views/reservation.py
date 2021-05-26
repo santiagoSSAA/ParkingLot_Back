@@ -326,4 +326,4 @@ class SpecificCostReservationApi(APIView, TokenHandler):
             }, status=status.HTTP_409_CONFLICT)
 
         hour = (final_hour - initial_hour).seconds // 3600
-        return {"auto":settings.CAR_PRICE,"moto":settings.MOTO_PRICE}[type]
+        return Response({"price": {"auto":settings.CAR_PRICE,"moto":settings.MOTO_PRICE}[type]}, status=status.HTTP_200_OK)
