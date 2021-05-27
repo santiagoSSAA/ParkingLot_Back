@@ -66,7 +66,7 @@ class PaymentApi(APIView, TokenHandler):
             return Response({
                 "code": "resrvation_already_payed",
                 "detailed": "Reservación ya paga"
-            },status=status.HTTP_404_NOT_FOUND)
+            },status=status.HTTP_409_CONFLICT)
 
         payment = Payment.objects.create(**request.data)
         return Response({"created": payment.pk}, status=status.HTTP_201_CREATED)

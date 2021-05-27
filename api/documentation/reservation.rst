@@ -24,7 +24,7 @@ Crea una reservación
 
 .. sourcecode:: http
 
-    POST /api/v1/reserve HTTP/1.1
+    POST /api/v1/reservation HTTP/1.1
     Content-Type: application/json
     Authorization: Bearer asiherlksdnfsuhse...
 
@@ -64,15 +64,14 @@ Devuelve una lista de reservaciones
 
 .. sourcecode:: http
 
-    GET /api/v1/reserve HTTP/1.1
+    GET /api/v1/reservation HTTP/1.1
     Authorization: Bearer asiherlksdnfsuhse...
-
 
 **Ejemplo de respuesta**
 
 .. sourcecode:: http
 
-    HTTP/1.1 201 CREATED
+    HTTP/1.1 200 OK
     Content-Type: application/json
     {
         "count": 1,
@@ -102,6 +101,32 @@ Devuelve una lista de reservaciones
         }]        
     }
 
+Recurso GET
+------------
+.. http:get:: /api/v1/reservation/price/{id:int}
+
+Devuelve el precio de una reservación
+
+**Ejemplo de petición**
+
+.. sourcecode:: http
+
+    GET /api/v1/reservation/price/1 HTTP/1.1
+    Authorization: Bearer asiherlksdnfsuhse...
+
+**Ejemplo de respuesta**
+
+.. sourcecode:: http
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+        "price": 8000.0,
+        "hours": 1
+    }
+
+
 Recurso PATCH
 --------------
 .. http:get:: /api/v1/reservation/{id:int}
@@ -120,7 +145,7 @@ Actualiza los datos de una reservacion
 
 .. sourcecode:: http
 
-    PATCH /api/v1/reserve HTTP/1.1
+    PATCH /api/v1/reservation HTTP/1.1
     Content-Type: application/json
     Authorization: Bearer asiherlksdnfsuhse...
 
@@ -149,7 +174,7 @@ Cancela una reservación
 
 .. sourcecode:: http
 
-    DELETE /api/v1/reserve HTTP/1.1
+    DELETE /api/v1/reservation HTTP/1.1
     Authorization: Bearer asiherlksdnfsuhse...
 
 **Ejemplo de respuesta**
