@@ -83,7 +83,7 @@ Devuelve una lista de reservaciones
     {
         "count": 1,
         "data": [{
-            user : {
+            "user" : {
                 "id": 1,
                 "email": "pepe@email.com",
                 "name": "pepe garcia",
