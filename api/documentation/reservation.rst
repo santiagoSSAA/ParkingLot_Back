@@ -12,6 +12,7 @@ Crea una reservación
 :initial_hour: **(datetime)** Hora de inicio (yyyy-mm-dd HH:MM)
 
 **Campos opcionales**
+
 :document: **(string)** Documento (en caso de ser reserva sin usuario)
 
 :email: **(string)** Email 
