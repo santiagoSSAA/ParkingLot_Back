@@ -18,7 +18,7 @@ from ..models.user import User
 from ..models.parking_slot import ParkingSlot
 from ..models.reservation import Reservation
 
-from ..serializers.reservation import ReservationSerializer
+from ..serializers.reservation import ReservationSerializer, ReservationClientSerializer
 
 
 class ReservationApi(APIView, TokenHandler):
@@ -164,7 +164,8 @@ class ReservationApi(APIView, TokenHandler):
 
         return Response({
             "code": data.count(),
-            "data": ReservationSerializer(data,many=True).data
+            "data": (ReservationSerializer(data,many=True).data
+            if user.profile == "admin" else ReservationClientSerializer(data,many=True).data)
         }, status=status.HTTP_200_OK)
 
 class SpecificReservationApi(APIView, TokenHandler):
