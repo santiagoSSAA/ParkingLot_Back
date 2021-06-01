@@ -32,7 +32,7 @@ Crea un usuario en la plataforma.
     Authorization: Bearer asiherlksdnfsuhse...
 
     {
-        "birthdate": "2021-05-03T12:00:12.783015",
+        "birthdate": "2000-4-6",
         "document": "1008293849",
         "name": "Cesar Alejandro Comino Hernandez",
         "email": "cesarElCrack@yopmail.com",
@@ -171,7 +171,7 @@ Modifica la información de un usuario en la plataforma.
     Authorization: Bearer eyaslm234jkh6ñl34k2354jkh...
 
     {
-        "birthdate": "2021-05-03T12:00:12.783015",
+        "birthdate": "2000-4-6",
         "document": "1008293849",
         "name": "Cesar Alejandro Comino Hernandez",
         "email": "cesarElCrack@yopmail.com",
