@@ -95,7 +95,19 @@ Devuelve una lista de slots.
                 "status": "Ocupado"
             }
         ]
-    }    
+    }
+
+    {
+        "count": 1,
+        "data": [
+            {
+                "id": 1,
+                "place_code": "FPG099",
+                "reservation": null,
+                "status": "Disponible"
+            }
+        ]
+    }
 
 Recurso GET específico
 -----------------------
