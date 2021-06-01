@@ -77,6 +77,9 @@ Devuelve una lista de reservaciones
 
     HTTP/1.1 200 OK
     Content-Type: application/json
+
+    **SI ES ADMIN**
+
     {
         "count": 1,
         "data": [{
@@ -103,6 +106,23 @@ Devuelve una lista de reservaciones
             "email": null,
             "is_cancelled": false
         }]        
+    }
+
+    **SI NO ES ADMIN**
+
+    {
+        "code": 1,
+        "data": [
+            {
+                "id": 3,
+                "initial_hour": "2021-06-01T16:45:00-05:00",
+                "final_hour": "2021-06-21T17:55:00-05:00",
+                "vehicle_plate": "",
+                "vehicle_type": "auto",
+                "slot": "FPG0981",
+                "status": "Vigente" (o Finalizado o Próximo)
+            }
+        ]
     }
 
 Recurso GET
