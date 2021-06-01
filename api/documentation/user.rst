@@ -33,13 +33,13 @@ Crea un usuario en la plataforma.
 
     {
         "birthdate": "2000-4-6",
-        "document": "1008293849",
-        "name": "Cesar Alejandro Comino Hernandez",
-        "email": "cesarElCrack@yopmail.com",
-        "password": "5InchesInYourMom",
-        "cellphone": "31829382938",
+        "document": "1002931293",
+        "name": "Pepe García",
+        "email": "ejemplo2@yopmail.com",
+        "password": "contraseña1",
+        "cellphone": "3182938192",
         "gender": "M",
-        "number_plate": "PFG-053",
+        "number_plate": "PFG068",
         "vehicle_type": "auto"
     }
 
@@ -172,15 +172,14 @@ Modifica la información de un usuario en la plataforma.
 
     {
         "birthdate": "2000-4-6",
-        "document": "1008293849",
-        "name": "Cesar Alejandro Comino Hernandez",
-        "email": "cesarElCrack@yopmail.com",
-        "password": "5InchesInYourMom",
-        "cellphone": "31829382938",
+        "document": "1002931293",
+        "name": "Pepe García",
+        "email": "ejemplo2@yopmail.com",
+        "password": "contraseña1",
+        "cellphone": "3182938192",
         "gender": "M",
-        "number_plate": "PFG-053",
-        "vehicle_type": "auto",
-        "is_active": true
+        "number_plate": "PFG068",
+        "vehicle_type": "auto"
     }
 
 **Ejemplos de respuesta**
