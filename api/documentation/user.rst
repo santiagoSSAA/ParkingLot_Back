@@ -168,11 +168,8 @@ Modifica la información de un usuario en la plataforma.
     Authorization: Bearer eyaslm234jkh6ñl34k2354jkh...
 
     {
-        "birthdate": "2000-4-6",
         "document": "1002931293",
         "name": "Pepe García",
-        "email": "ejemplo2@yopmail.com",
-        "password": "contraseña1",
         "cellphone": "3182938192",
         "gender": "M",
         "number_plate": "PFG068",
