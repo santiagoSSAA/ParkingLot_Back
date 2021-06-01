@@ -152,11 +152,8 @@ Modifica la información de un usuario en la plataforma.
 
 **Nota:** Se debe enviar como mínimo un dato. Todos los campos son opcionales.
 
-:birthday: **(date)** Fecha de nacimiento.
 :document: **(string)** Número de documento.
 :name: **(string)** Nombres con apellidos.
-:email: **(string)** Correo electrónico.
-:password: **(string)** Contraseña.
 :cellphone: **(string)** Número celular.
 :gender: **(string)** Género ( M , F , U ).
 :number_plate: **(string)** Número de placa.
