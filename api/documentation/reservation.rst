@@ -45,6 +45,15 @@ Crea una reservación
     }
 
     {
+        "document": "1002938192",
+        "email": "pepe@email.com",
+        "initial_hour": "2021-05-21 12:45",
+        "slot": 1,
+        "vehicle_plate": "pfg098",
+        "vehicle_type": "auto"
+    }
+
+    {
         "initial_hour": "2021-05-21 12:45",
         "final_hour": "2021-05-21 18:45",
         "user": 3
