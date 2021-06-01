@@ -106,8 +106,7 @@ Devuelve una lista de slots.
         "data": [
             {
                 "id": 1,
-                "place_code": "FPG099",
-                "reservation": null
+                "place_code": "FPG099"
             }
         ]
     }
