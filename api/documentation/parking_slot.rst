@@ -61,6 +61,8 @@ Devuelve una lista de slots.
     HTTP/1.1 200 OK
     Content-Type: application/json
 
+    **SI ES ADMIN**
+
     {
         "count": 1,
         "data": [
@@ -97,14 +99,15 @@ Devuelve una lista de slots.
         ]
     }
 
+    **SI NO ES ADMIN**
+
     {
         "count": 1,
         "data": [
             {
                 "id": 1,
                 "place_code": "FPG099",
-                "reservation": null,
-                "status": "Disponible"
+                "reservation": null
             }
         ]
     }

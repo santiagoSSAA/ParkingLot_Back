@@ -17,6 +17,8 @@ Crea una reservación
 
 :email: **(string)** Email 
 
+:slot: **(integer)** id del slot
+
 :final_hour: **(datetime)** Hora de finalización (mismo formato que arriba)
 
 :user: **(string)** pk del usuario

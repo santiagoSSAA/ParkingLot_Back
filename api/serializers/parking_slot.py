@@ -15,7 +15,7 @@ class ParkingSlotClientSerializer(serializers.ModelSerializer):
 
     class Meta: # pylint: disable=too-few-public-methods
         model = ParkingSlot
-        fields = ["id", "place_code", "status"]
+        fields = ["id", "place_code"]
 
 class ParkingSlotSerializer(serializers.ModelSerializer):
     """ Defines Parking slot serializer behaviour. """
