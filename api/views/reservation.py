@@ -49,7 +49,6 @@ class ReservationApi(APIView, TokenHandler):
                     "coerce": to_date},
                 "final_hour": {"required": True, "type": "datetime",
                     "coerce": to_date},
-                "slot": {"required": True, "type": "integer"},
                 "vehicle_plate": {"required": False, "type": "string"},
                 "vehicle_type": {"required": False, "type": "string",
                     "allowed": ["auto","moto"] },
@@ -62,7 +61,6 @@ class ReservationApi(APIView, TokenHandler):
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
-                "slot": {"required": True, "type": "integer"},
                 "vehicle_plate": {"required": True, "type": "string"},
                 "vehicle_type": {"required": True, "type": "string",
                     "allowed": ["auto","moto"] },
@@ -76,20 +74,6 @@ class ReservationApi(APIView, TokenHandler):
 
         if user.profile == "user":
             request.data["user"] = user
-
-        slot = ParkingSlot.objects.filter(pk=request.data.get("slot")).first()
-        if not slot:
-            return Response({
-                "code": "slot_not_found",
-                "detailed": "Aparcamiento no encontrado"
-            },status=status.HTTP_404_NOT_FOUND)
-
-        if slot.get_status() != "Disponible":
-            return Response({
-                "code": "slot_not_available",
-                "detailed": "Aparcamiento ocupado"
-            },status=status.HTTP_409_CONFLICT)
-        request.data["slot"] = slot
         
         if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') <
             datetime.now()):
@@ -114,6 +98,16 @@ class ReservationApi(APIView, TokenHandler):
                 "detailed": "La reservación debe durar al menos una (1) hora."
             },status=status.HTTP_409_CONFLICT)
 
+        slots = ParkingSlot.objects.filter(is_active=True)
+        slot_pks = [slot.pk for slot in slots if slot.get_status() == "Disponible"]
+        slot = slots.filter(pk__in=slot_pks).order_by('-place_code').first()
+        if not slot:
+            return Response({
+                "code": "slots_fullfied",
+                "detailed": "Aparcamiento lleno"
+            },status=status.HTTP_404_NOT_FOUND)
+
+        request.data["slot"] = slot
         reservation = Reservation.objects.create(**request.data)
         return Response({"id": reservation.pk}, status=status.HTTP_201_CREATED)
 
