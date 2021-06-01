@@ -53,7 +53,8 @@ class AuthApi(APIView):
         if not user:
             type = request.data["type"]
             return Response({
-                "code": f"{type}_not_found"
+                "code": f"{type}_not_found",
+                "detailed": "usuario no encontrado"
             },status=status.HTTP_404_NOT_FOUND)       
 
         if not check_password(request.data["password"], user.password):
