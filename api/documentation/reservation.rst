@@ -10,15 +10,20 @@ Crea una reservación
 
 **Campos obligatorios**
 :initial_hour: **(datetime)** Hora de inicio (yyyy-mm-dd HH:MM)
-:slot: **(string)** pk del slot a usar
 
 **Campos opcionales**
 :document: **(string)** Documento (en caso de ser reserva sin usuario)
+
 :email: **(string)** Email 
+
 :final_hour: **(datetime)** Hora de finalización (mismo formato que arriba)
+
 :user: **(string)** pk del usuario
+
 :vehicle_type: **(string)** auto o moto
+
 :vehicle_plate: **(string)** placa de vehiculo
+
 
 **Ejemplo de petición**
 
