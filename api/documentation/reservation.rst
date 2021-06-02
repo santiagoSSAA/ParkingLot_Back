@@ -8,10 +8,9 @@ Recurso POST
 
 Crea una reservación
 
-**Campos obligatorios**
-:initial_hour: **(datetime)** Hora de inicio (yyyy-mm-dd HH:MM)
-
 **Campos opcionales**
+
+:initial_hour: **(datetime)** Hora de inicio (yyyy-mm-dd HH:MM)
 
 :document: **(string)** Documento (en caso de ser reserva sin usuario)
 
@@ -20,8 +19,6 @@ Crea una reservación
 :slot: **(integer)** id del slot
 
 :final_hour: **(datetime)** Hora de finalización (mismo formato que arriba)
-
-:user: **(string)** pk del usuario
 
 :vehicle_type: **(string)** auto o moto
 

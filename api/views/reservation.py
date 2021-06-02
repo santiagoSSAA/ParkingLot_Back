@@ -45,7 +45,7 @@ class ReservationApi(APIView, TokenHandler):
 
         if user.profile == "user":
             validator = Validator({
-                "initial_hour": {"required": True, "type": "datetime",
+                "initial_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
@@ -76,6 +76,9 @@ class ReservationApi(APIView, TokenHandler):
         request.data["vehicle_plate"] = request.data.pop("number_plate")
         if user.profile == "user":
             request.data["user"] = user
+
+        if not "initial_hour" in request.data:
+            request.data["initial_hour"] = timezone.now()
 
         if request.data.get("slot"):
             slot = ParkingSlot.objects.filter(pk=request.data.get("slot")).first()
