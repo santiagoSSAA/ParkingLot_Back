@@ -102,9 +102,8 @@ class ParkingSlotApi(APIView, TokenHandler):
             slots = [slot.id for slot in slots
                 if slot.get_status() == request.GET.get("place_code")]
             slots = ParkingSlot.objects.filter(pk__in=slots)
-        if user.profile == "client":
-            slots = [slot.id for slot in slots
-                if slot.get_status() == "Disponible"]
+        if user.profile != "admin":
+            slots = [slot.id for slot in slots if slot.get_status() == "Disponible"]
             slots = ParkingSlot.objects.filter(pk__in=slots)
 
         count = slots.count()
