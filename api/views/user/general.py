@@ -172,9 +172,7 @@ class SpecificUserApi(APIView, TokenHandler):
         if user.profile != "admin" and user != consulted_user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        return Response({
-            'data': UserSerializer(user).data,
-        }, status=status.HTTP_200_OK)
+        return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
 
     def patch(self, request, *args, **kwargs):
         """ Update user information.

@@ -210,7 +210,66 @@ Modifica la información de un usuario en la plataforma.
         "detailed": "No tienes permiso para ejecutar esta acción."
     }
     
-    :status 200: Usuario modificado
-    :status 400: Cuerpo con estructura inválida
-    :status 401: Token no enviado o inválido
-    :status 403: Acceso restringido al recurso
+:status 200: Usuario modificado
+:status 400: Cuerpo con estructura inválida
+:status 401: Token no enviado o inválido
+:status 403: Acceso restringido al recurso
+
+Recurso GET específico
+-----------------------
+.. http:get:: /api/v1/user/<int:id>
+
+Retorna la información de un usuario específico
+
+**Ejemplo de petición**
+
+.. sourcecode:: http
+
+    GET /api/v1/user/2 HTTP/1.1
+    Authorization: Bearer eyaslm234jkh6ñl34k2354jkh...
+
+**Ejemplo de respuesta**
+
+.. sourcecode:: http
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+        "id": 1,
+        "email": "admin@yopmail.com",
+        "name": "Un admin bien crack",
+        "birthdate": "2021-05-13",
+        "gender": "U",
+        "cellphone": "3291829381",
+        "document": "1029382938",
+        "profile": "admin",
+        "number_plate": "pfg098",
+        "vehicle_type": null,
+        "creation_date": "2021-05-13T11:19:37.945454-05:00"
+    }
+
+:status 200: Usuario modificado
+:status no 200: Hubo un error LMAO
+
+Recurso DELETE
+---------------
+.. http:delete:: /api/v1/user/<int:id>
+
+Borra un usuario (solo admin)
+
+**Ejemplo de petición**
+
+.. sourcecode:: http
+
+    DELETE /api/v1/user/2 HTTP/1.1
+    Authorization: Bearer eyaslm234jkh6ñl34k2354jkh...
+
+**Ejemplo de respuesta**
+
+.. sourcecode:: http
+
+    HTTP/1.1 200 OK
+
+:status 200: Usuario borrado
+:status no 200: Hubo un error LMAO
