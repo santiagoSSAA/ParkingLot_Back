@@ -50,7 +50,7 @@ class ReservationApi(APIView, TokenHandler):
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
                 "slot": {"required": False, "type": "integer"},
-                "vehicle_plate": {"required": False, "type": "string"},
+                "number_plate": {"required": False, "type": "string"},
                 "vehicle_type": {"required": False, "type": "string",
                     "allowed": ["auto","moto"] },
             })
@@ -62,7 +62,7 @@ class ReservationApi(APIView, TokenHandler):
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
-                "vehicle_plate": {"required": True, "type": "string"},
+                "number_plate": {"required": True, "type": "string"},
                 "vehicle_type": {"required": True, "type": "string",
                     "allowed": ["auto","moto"] },
             })
@@ -73,6 +73,7 @@ class ReservationApi(APIView, TokenHandler):
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
+        request.data["vehicle_plate"] = request.data.pop("number_plate")
         if user.profile == "user":
             request.data["user"] = user
 
@@ -159,7 +160,7 @@ class ReservationApi(APIView, TokenHandler):
             query["document_number__icontains"] = request.GET["document_number"]
         if "email" in request.GET:
             query["email__icontains"] = request.GET["email"]
-        if "vehicle_plate" in request.GET:
+        if "number_plate" in request.GET:
             query["vehiche_plate__icontains"] = request.GET["vehicle_plate"]
         if "vehicle_type" in request.GET:
             query["vehicle_type"] = request.GET["vehicle_type"]
@@ -214,7 +215,7 @@ class SpecificReservationApi(APIView, TokenHandler):
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
-                "vehicle_plate": {"required": False, "type": "string"},
+                "number_plate": {"required": False, "type": "string"},
                 "vehicle_type": {"required": False, "type": "string",
                     "allowed": ["auto","moto"] }
             })
@@ -231,6 +232,9 @@ class SpecificReservationApi(APIView, TokenHandler):
                 "detailed": "Parámetros de búsqueda inválidos",
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
+
+        if "number_plate" in request.data:
+            request.data["vehicle_plate"] = request.data.pop("number_plate")
 
         reservation = Reservation.objects.filter(pk=kwargs["id"]).first()
         if not reservation:
