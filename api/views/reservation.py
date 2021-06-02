@@ -282,7 +282,7 @@ class SpecificReservationApi(APIView, TokenHandler):
                 "detailed": "Reservación no encontrada"
             },status=status.HTTP_404_NOT_FOUND)
 
-        if (reservation.initial_hour - datetime.now()).seconds / 3600 < 1:
+        if (reservation.initial_hour.replace(tzinfo=None) - datetime.now().replace(tzinfo=None)).seconds / 3600 < 1:
             return Response({
                "code": "timelapse_expired",
                "detailed": "tiempo disponible de campo expirado" 
