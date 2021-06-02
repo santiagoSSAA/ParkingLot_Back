@@ -137,7 +137,7 @@ Devuelve una lista de pagos
                     },
                     "initial_hour": "2021-05-21T05:25:00-05:00",
                     "final_hour": "2021-05-21T06:25:00-05:00",
-                    "vehicle_plate": "",
+                    "number_plate": "",
                     "vehicle_type": "auto",
                     "slot": 1,
                     "document_number": null,

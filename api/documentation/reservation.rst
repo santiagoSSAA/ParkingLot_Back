@@ -40,7 +40,7 @@ Crea una reservación
         "document": "1002938192",
         "email": "pepe@email.com",
         "initial_hour": "2021-05-21 12:45",
-        "vehicle_plate": "pfg098",
+        "number_plate": "pfg098",
         "vehicle_type": "auto"
     }
 
@@ -49,7 +49,7 @@ Crea una reservación
         "email": "pepe@email.com",
         "initial_hour": "2021-05-21 12:45",
         "slot": 1,
-        "vehicle_plate": "pfg098",
+        "number_plate": "pfg098",
         "vehicle_type": "auto"
     }
 
@@ -107,7 +107,7 @@ Devuelve una lista de reservaciones
             },
             "initial_hour": "20201-02-12T01239123.12312",
             "final_hour": "20201-02-12T01239123.14576",
-            "vehicle_plate": null,
+            "number_plate": null,
             "vehicle_type": null,
             "slot": {
                 "id": 12,
@@ -128,7 +128,7 @@ Devuelve una lista de reservaciones
                 "id": 3,
                 "initial_hour": "2021-06-01T16:45:00-05:00",
                 "final_hour": "2021-06-21T17:55:00-05:00",
-                "vehicle_plate": "",
+                "number_plate": "",
                 "vehicle_type": "auto",
                 "slot": "FPG0981",
                 "status": "Vigente" (o Finalizado o Próximo)
@@ -189,7 +189,7 @@ Actualiza los datos de una reservacion
         "email": "pepe@email.com",
         "initial_hour": "2021-05-21 12:45",
         "slot": 12,
-        "vehicle_plate": "pfg098",
+        "number_plate": "pfg098",
         "vehicle_type": "auto"
     }
 
