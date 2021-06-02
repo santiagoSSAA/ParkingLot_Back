@@ -29,7 +29,7 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta: # pylint: disable=too-few-public-methods        
         model = Reservation
-        fields = ["id", "user", "initial_hour", "final_hour", "vehicle_plate",
+        fields = ["id", "user", "initial_hour", "final_hour", "number_plate",
         "vehicle_type", "slot", "document_number", "email", "status", "is_cancelled"]
 
     def get_plate(self, obj):
