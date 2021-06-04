@@ -122,7 +122,8 @@ Devuelve la información de usuarios de la plataforma.
                 "cellphone": "31829382938",
                 "gender": "M",
                 "number_plate": "PFG-053",
-                "vehicle_type": "auto"
+                "vehicle_type": "auto",
+                "is_active": true
             }
         ]
     }
