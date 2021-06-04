@@ -114,7 +114,7 @@ Devuelve la información de usuarios de la plataforma.
         "count": 1,
         "data": [
             {
-                "id": 2
+                "id": 2,
                 "birthdate": "2021-05-03T12:00:12.783015",
                 "document": "1008293849",
                 "name": "Cesar Alejandro Comino Hernandez",
