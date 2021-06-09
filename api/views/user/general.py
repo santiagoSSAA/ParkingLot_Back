@@ -203,13 +203,18 @@ class SpecificUserApi(APIView, TokenHandler):
             "vehicle_type": {"required": False, "type": "string",
                 "allowed": ["auto","moto"] }
         })
-        if not validator.validate(request.data) or not request.data:
+        if not validator.validate(request.data):
             return Response({
                 "code": "invalid_body",
                 "detailed": "cuerpo inválido",
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
+        if not request.data:
+            return Response({
+                "code": "invalid_body",
+                "detailed": "cuerpo inválido - no puede estar vacío"
+            }, status=status.HTTP_400_BAD_REQUEST)
         consulted_user = User.objects.filter(pk=kwargs["id"]).first()
         if not consulted_user:
             return Response({
