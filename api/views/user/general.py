@@ -203,7 +203,7 @@ class SpecificUserApi(APIView, TokenHandler):
             "vehicle_type": {"required": False, "type": "string",
                 "allowed": ["auto","moto"] }
         })
-        if not validator.validate(request.data):
+        if not validator.validate(request.data) or not request.data:
             return Response({
                 "code": "invalid_body",
                 "detailed": "cuerpo inválido",
