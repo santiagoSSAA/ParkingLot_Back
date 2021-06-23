@@ -71,7 +71,7 @@ class AuthApi(APIView):
             "email": user.email,
             "type": request.data["type"],
             "refresh": refresh
-        }, settings.SECRET_KEY, algorithm='HS256')
+        }, settings.SECRET_KEY, algorithm='HS256').decode('utf-8')
 
         Auth.objects.create(token=token)
         return Response({
