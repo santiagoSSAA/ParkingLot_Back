@@ -128,6 +128,9 @@ class ReservationApi(APIView, TokenHandler):
                 "detailed": "La reservación debe durar al menos una (1) hora."
             },status=status.HTTP_409_CONFLICT)
 
+        if "document" in request.data:
+            request.data["document_number"] = request.data.pop("document")
+
         reservation = Reservation.objects.create(**request.data)
         return Response({"id": reservation.pk}, status=status.HTTP_201_CREATED)
 
