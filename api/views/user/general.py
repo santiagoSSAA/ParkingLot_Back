@@ -270,6 +270,12 @@ class SpecificUserApi(APIView, TokenHandler):
                 "detailed": "usuario no encontrado"
             },status=status.HTTP_404_NOT_FOUND)
 
+        if deleted_user.profile == "admin":
+            return Response({
+                "code": "dont_do_that",
+                "detailed": "No te dejaré borrar admins"
+            },status=status.HTTP_409_CONFLICT)
+
         deleted_user.is_active = False
         deleted_user.save()
         return Response(status=status.HTTP_200_OK)
