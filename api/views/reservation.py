@@ -239,6 +239,9 @@ class SpecificReservationApi(APIView, TokenHandler):
         if "number_plate" in request.data:
             request.data["vehicle_plate"] = request.data.pop("number_plate")
 
+        if "document" in request.data:
+            request.data["document_number"] = request.data.pop("document")
+
         reservation = Reservation.objects.filter(pk=kwargs["id"]).first()
         if not reservation:
             return Response({
