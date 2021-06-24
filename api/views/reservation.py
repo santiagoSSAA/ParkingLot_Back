@@ -336,13 +336,12 @@ class SpecificCostReservationApi(APIView, TokenHandler):
             },status=status.HTTP_404_NOT_FOUND)
 
         if not reservation.user:
-            final_hour = timezone.now()
-            type = reservation.vehicle_type
+            final_hour = timezone.now()        
         else:
             final_hour = reservation.final_hour
-            type = reservation.user.vehicle_type
         initial_hour = reservation.initial_hour
 
+        type = reservation.vehicle_type
         if not final_hour or not initial_hour:
             return Response({
                 "code": "hour_cannot_be_none",
