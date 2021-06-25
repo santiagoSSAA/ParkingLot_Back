@@ -32,15 +32,6 @@ Crea una reservación
     POST /api/v1/reservation HTTP/1.1
     Content-Type: application/json
     Authorization: Bearer asiherlksdnfsuhse...
-
-    {
-        "document": "1002938192",
-        "email": "pepe@email.com",
-        "initial_hour": "2021-05-21 12:45",
-        "number_plate": "pfg098",
-        "vehicle_type": "auto"
-    }
-
     {
         "document": "1002938192",
         "email": "pepe@email.com",

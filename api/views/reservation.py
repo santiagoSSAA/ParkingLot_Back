@@ -58,6 +58,7 @@ class ReservationApi(APIView, TokenHandler):
             validator = Validator({
                 "document": {"required": True, "type": "string"},
                 "email": {"required": True, "type": "string"},
+                "slot": {"required": False, "type": "integer"},
                 "initial_hour": {"required": True, "type": "datetime",
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
