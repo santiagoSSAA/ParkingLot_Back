@@ -115,7 +115,7 @@ class ReservationApi(APIView, TokenHandler):
 
         if Reservation.objects.filter(
             Q(initial_hour=request.data.get("initial_hour")) |
-            Q(final_hour=request.data.get("final_hour"))):
+            Q(final_hour=request.data.get("final_hour")), is_cancelled=False):
             return Response({
                 "code": "invalid_range",
                 "detailed": "Ya existe una reserva con la hora estipulada."
