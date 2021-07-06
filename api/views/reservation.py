@@ -69,8 +69,8 @@ class ReservationApi(APIView, TokenHandler):
             })
         if not validator.validate(request.data):
             return Response({
-                "code": "invalid_filtering_params",
-                "detailed": "Parámetros de búsqueda inválidos",
+                "code": "invalid_body",
+                "detailed": "cuerpo inválido",
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 

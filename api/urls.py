@@ -38,7 +38,7 @@ urlpatterns = [
     path('reservation/<int:id>', SpecificReservationApi.as_view()),
     path('reservation/price/<int:id>', SpecificCostReservationApi.as_view()),
     path('parking_slot', ParkingSlotApi.as_view()),
-    path('parking_slot/<int:id>', SpecificParkingSlotApi().as_view()),
+    path('parking_slot/<int:id>', SpecificParkingSlotApi.as_view()),
     path('password_recovery', PasswordRecoveryApi.as_view()),
     path('password_recovery/<str:token>', SpecificPasswordRecoveryApi.as_view()),
     path('payment', PaymentApi.as_view()),
