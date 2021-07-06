@@ -49,7 +49,7 @@ class ReservationApi(APIView, TokenHandler):
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
-                "slot": {"required": False, "type": "integer"},
+                "slot": {"required": False, "type": "string", "regex": r"\d+"},
                 "number_plate": {"required": False, "type": "string"},
                 "vehicle_type": {"required": False, "type": "string",
                     "allowed": ["auto","moto"] },
@@ -58,7 +58,7 @@ class ReservationApi(APIView, TokenHandler):
             validator = Validator({
                 "document": {"required": True, "type": "string"},
                 "email": {"required": True, "type": "string"},
-                "slot": {"required": False, "type": "integer"},
+                "slot": {"required": False, "type": "string", "regex": r"\d+"},
                 "initial_hour": {"required": True, "type": "datetime",
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
@@ -82,7 +82,7 @@ class ReservationApi(APIView, TokenHandler):
             request.data["initial_hour"] = timezone.now()
 
         if request.data.get("slot"):
-            slot = ParkingSlot.objects.filter(pk=request.data.get("slot")).first()
+            slot = ParkingSlot.objects.filter(pk=int(request.data.get("slot"))).first()
             if not slot:
                 return Response({
                     "code": "slot_not_found",
