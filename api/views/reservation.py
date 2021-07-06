@@ -222,6 +222,7 @@ class SpecificReservationApi(APIView, TokenHandler):
                     "coerce": to_date},
                 "final_hour": {"required": False, "type": "datetime",
                     "coerce": to_date},
+                "slot": {"required": False, "type": "string", "regex": r"\d+"},
                 "number_plate": {"required": False, "type": "string"},
                 "vehicle_type": {"required": False, "type": "string",
                     "allowed": ["auto","moto"] }
@@ -235,8 +236,8 @@ class SpecificReservationApi(APIView, TokenHandler):
             })
         if not validator.validate(request.data):
             return Response({
-                "code": "invalid_filtering_params",
-                "detailed": "Parámetros de búsqueda inválidos",
+                "code": "invalid_body",
+                "detailed": "Cuerpo inválido",
                 "data": validator.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
@@ -245,6 +246,21 @@ class SpecificReservationApi(APIView, TokenHandler):
 
         if "document" in request.data:
             request.data["document_number"] = request.data.pop("document")
+
+        if request.data.get("slot"):
+            slot = ParkingSlot.objects.filter(pk=int(request.data.get("slot"))).first()
+            if not slot:
+                return Response({
+                    "code": "slot_not_found",
+                    "detailed": "Aparcamiento no encontrado"
+                },status=status.HTTP_404_NOT_FOUND)
+
+            if slot.get_status() != "Disponible":
+                return Response({
+                    "code": "slot_not_available",
+                    "detailed": "Aparcamiento ocupado"
+                },status=status.HTTP_409_CONFLICT)
+            request.data["slot"] = slot
 
         reservation = Reservation.objects.filter(pk=kwargs["id"]).first()
         if not reservation:
