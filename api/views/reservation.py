@@ -173,9 +173,9 @@ class ReservationApi(APIView, TokenHandler):
             query["vehicle_type"] = request.GET["vehicle_type"]
 
         if query:
-            data = Reservation.objects.filter(**query)
+            data = Reservation.objects.filter(**query).order_by('-created')
         else:
-            data = Reservation.objects.all()
+            data = Reservation.objects.all().order_by('-created')
 
         if "status" in request.GET:
             reserve_pks = [reserve.pk for reserve in data if
