@@ -79,7 +79,7 @@ class ReservationApi(APIView, TokenHandler):
             request.data["user"] = user
 
         if not "initial_hour" in request.data:
-            request.data["initial_hour"] = timezone.now()
+            request.data["initial_hour"] = timezone.now().strftime('%Y-%m-%d %H:%M')
 
         if request.data.get("slot"):
             slot = ParkingSlot.objects.filter(pk=int(request.data.get("slot"))).first()
