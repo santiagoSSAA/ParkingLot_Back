@@ -10,7 +10,7 @@ from .models.user import User
 # Register your models here.
 admin.site.register(Auth)
 admin.site.register(ParkingSlot)
-admin.site.register(PasswordRecovery)
+#admin.site.register(PasswordRecovery)
 admin.site.register(Payment)
 admin.site.register(Reservation)
 admin.site.register(User)
