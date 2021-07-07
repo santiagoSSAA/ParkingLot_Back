@@ -41,6 +41,7 @@ class ReservationApi(APIView, TokenHandler):
         def to_date(s): return datetime.strptime(s, '%Y-%m-%d %H:%M')
         if not payload:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
+        now = datetime.now()
 
         if user.profile == "user":
             validator = Validator({
@@ -78,7 +79,7 @@ class ReservationApi(APIView, TokenHandler):
             request.data["user"] = user
 
         if not "initial_hour" in request.data:
-            request.data["initial_hour"] = datetime.now().strftime('%Y-%m-%d %H:%M')
+            request.data["initial_hour"] = now.strftime('%Y-%m-%d %H:%M')
 
         if request.data.get("slot"):
             slot = ParkingSlot.objects.filter(pk=int(request.data.get("slot"))).first()
@@ -105,8 +106,7 @@ class ReservationApi(APIView, TokenHandler):
                 },status=status.HTTP_404_NOT_FOUND)
             request.data["slot"] = slot
         
-        if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') <
-            datetime.now()):
+        if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') < now):
             return Response({
                 "code": "invalid_initial_hour",
                 "detailed": "No se puede iniciar reservas con horas pasadas."
