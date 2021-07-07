@@ -78,9 +78,6 @@ class ReservationApi(APIView, TokenHandler):
         if user.profile == "user":
             request.data["user"] = user
 
-        if not "initial_hour" in request.data:
-            request.data["initial_hour"] = now.strftime('%Y-%m-%d %H:%M')
-
         if request.data.get("slot"):
             slot = ParkingSlot.objects.filter(pk=int(request.data.get("slot"))).first()
             if not slot:
@@ -106,11 +103,14 @@ class ReservationApi(APIView, TokenHandler):
                 },status=status.HTTP_404_NOT_FOUND)
             request.data["slot"] = slot
         
-        if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') < now):
+        if not request.data.get("initial_hour") and (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') < now):
             return Response({
                 "code": "invalid_initial_hour",
                 "detailed": "No se puede iniciar reservas con horas pasadas."
             },status=status.HTTP_409_CONFLICT)
+
+        if not "initial_hour" in request.data:
+            request.data["initial_hour"] = now.strftime('%Y-%m-%d %H:%M')
 
         if Reservation.objects.filter(
             Q(initial_hour=request.data.get("initial_hour")) |
