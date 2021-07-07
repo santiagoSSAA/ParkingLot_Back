@@ -4,7 +4,6 @@ from cerberus import Validator
 from datetime import datetime
 
 from django.db.models import Q
-from django.utils import timezone
 from django.conf import settings
 
 from rest_framework.views import APIView
@@ -79,7 +78,7 @@ class ReservationApi(APIView, TokenHandler):
             request.data["user"] = user
 
         if not "initial_hour" in request.data:
-            request.data["initial_hour"] = timezone.now().strftime('%Y-%m-%d %H:%M')
+            request.data["initial_hour"] = datetime.now().strftime('%Y-%m-%d %H:%M')
 
         if request.data.get("slot"):
             slot = ParkingSlot.objects.filter(pk=int(request.data.get("slot"))).first()
@@ -353,7 +352,7 @@ class SpecificCostReservationApi(APIView, TokenHandler):
             },status=status.HTTP_404_NOT_FOUND)
 
         if not reservation.user:
-            final_hour = timezone.now()        
+            final_hour = datetime.now()        
         else:
             final_hour = reservation.final_hour
         initial_hour = reservation.initial_hour
