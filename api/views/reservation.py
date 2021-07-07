@@ -103,11 +103,12 @@ class ReservationApi(APIView, TokenHandler):
                 },status=status.HTTP_404_NOT_FOUND)
             request.data["slot"] = slot
         
-        if not request.data.get("initial_hour") and (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') < now):
-            return Response({
-                "code": "invalid_initial_hour",
-                "detailed": "No se puede iniciar reservas con horas pasadas."
-            },status=status.HTTP_409_CONFLICT)
+        if not request.data.get("initial_hour"):
+             if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') < now):
+                return Response({
+                    "code": "invalid_initial_hour",
+                    "detailed": "No se puede iniciar reservas con horas pasadas."
+                },status=status.HTTP_409_CONFLICT)
 
         if not "initial_hour" in request.data:
             request.data["initial_hour"] = now.strftime('%Y-%m-%d %H:%M')
