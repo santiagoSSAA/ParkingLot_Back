@@ -103,7 +103,7 @@ class ReservationApi(APIView, TokenHandler):
                 },status=status.HTTP_404_NOT_FOUND)
             request.data["slot"] = slot
         
-        if not request.data.get("initial_hour"):
+        if request.data.get("initial_hour"):
              if (datetime.strptime(request.data.get("initial_hour"), '%Y-%m-%d %H:%M') < now):
                 return Response({
                     "code": "invalid_initial_hour",
